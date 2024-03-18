@@ -15,11 +15,10 @@ def index():
 
 @app.get('/movies')
 def list_all_movies():
-
-    # TODO: Feature 1 - Dylan
-    # Get all movies from the database and pass them to the
-    return render_template('list_all_movies.html', list_movies_active=True)
-
+    movie_repo = get_movie_repository()
+    movies_dict = movie_repo.get_all_movies()
+    movies_list = list(movies_dict.values())
+    return render_template('list_all_movies.html', movies=movies_list, list_movies_active=True)
 
 @app.get('/movies/new')
 def create_movies_form():
@@ -61,3 +60,4 @@ def update_movie(movie_id: int):
 def delete_movie(movie_id: int):
     # TODO: Feature 6
     pass
+
