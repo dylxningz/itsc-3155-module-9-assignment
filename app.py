@@ -30,16 +30,14 @@ def create_movie():
     # After creating the movie in the database, we redirect to the list all movies page
     return redirect('/movies')
 
-
-@app.get('/movies/search')
+@app.route('/movies/search', methods=['GET','POST'])
 def search_movies():
     # TODO: Feature 3
     if request.method == "POST":
         searched_movie = request.form.get("search")
         movie = movie_repository.get_movie_by_title(searched_movie)
+        return render_template(f'/movies/{movie.id}.html', movie=movie)
         
-
-
     return render_template('search_movies.html', search_active=True)
 
 
