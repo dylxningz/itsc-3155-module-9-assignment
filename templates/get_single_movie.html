@@ -10,6 +10,7 @@
 <p><strong>Rating:</strong> {{ movie.rating }} </p>
 
 <div class="row">
+    <form action="/movies/{{ movie.id }}/edit>" method="POST"></form>
     <div class="col-sm-6">
       <a href="/movies/{{ movie.id }}/edit" class="btn btn-secondary me-3">Edit</a> 
     </div>
