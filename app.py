@@ -63,5 +63,6 @@ def update_movie(movie_id: int):
 
 @app.post('/movies/<int:movie_id>/delete')
 def delete_movie(movie_id: int):
-    movie_repository.delete_movie(movie_id)
-    return redirect('/movies')
+
+    pass
+
