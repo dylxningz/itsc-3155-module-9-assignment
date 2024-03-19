@@ -3,6 +3,23 @@
 {% block title %}Movie Rating App | Movie{% endblock %}
 
 {% block body %}
-<h1 class="mb-5"></h1>
+<h1 class="mb-5"> {{movie.title }} </h1>
 <!-- TODO: Feature 4 -->
+
+<p><strong>Director:</strong> {{ movie.director }}</p>
+<p><strong>Rating:</strong> {{ movie.rating }} </p>
+<div>
+    <div> 
+        <a href="/movies/{{ movie.id }}/edit" class="btn btn-primary me-3">Edit</a> 
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ movie.id }}">Delete</button>
+      </div>
+      
+        
+        <form action="/movies/{{ movie.id }}/delete" method="POST">
+          
+        </form>
+
+
+
+</div>
 {% endblock %}
