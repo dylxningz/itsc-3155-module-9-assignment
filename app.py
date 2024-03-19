@@ -15,9 +15,10 @@ def index():
 
 @app.get('/movies')
 def list_all_movies():
-    # TODO: Feature 1
-    return render_template('list_all_movies.html', list_movies_active=True)
-
+    movie_repo = get_movie_repository()
+    movies_dict = movie_repo.get_all_movies()
+    movies_list = list(movies_dict.values())
+    return render_template('list_all_movies.html', movies=movies_list, list_movies_active=True)
 
 @app.get('/movies/new')
 def create_movies_form():
@@ -26,7 +27,11 @@ def create_movies_form():
 
 @app.post('/movies')
 def create_movie():
-    # TODO: Feature 2 
+    title = request.form.get('title')
+    director = request.form.get('director')
+    rating = int(request.form.get('rating'))
+
+    movie_repository.create_movie(title, director, rating)
     # After creating the movie in the database, we redirect to the list all movies page
     return redirect('/movies')
 
@@ -36,7 +41,9 @@ def search_movies():
     if request.method == "POST":
         searched_movie = request.form.get("search")
         movie = movie_repository.get_movie_by_title(searched_movie)
-        return render_template(f'/movies/{movie.id}.html', movie=movie)
+        if movie:
+            return redirect(f'/movies/{movie.movie_id}')
+        
         
     return render_template('search_movies.html', search_active=True)
 
@@ -64,3 +71,4 @@ def update_movie(movie_id: int):
 def delete_movie(movie_id: int):
     # TODO: Feature 6
     pass
+
