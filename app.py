@@ -51,8 +51,13 @@ def search_movies():
 @app.get('/movies/<int:movie_id>')
 def get_single_movie(movie_id: int):
     # TODO: Feature 4
+
     
     return render_template('get_single_movie.html')
+
+    movie = movie_repository.get_movie_by_id(movie_id)
+    return render_template('get_single_movie.html', movie=movie)
+
 
 
 @app.get('/movies/<int:movie_id>/edit')
@@ -69,6 +74,6 @@ def update_movie(movie_id: int):
 
 @app.post('/movies/<int:movie_id>/delete')
 def delete_movie(movie_id: int):
-    # TODO: Feature 6
+
     pass
 
