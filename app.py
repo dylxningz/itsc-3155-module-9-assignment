@@ -60,10 +60,7 @@ def get_single_movie(movie_id: int):
 
 
 
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 @app.route('/movies/<int:movie_id>/edit', methods=['GET'])
 def get_edit_movies_page(movie_id: int):
     movie = movie_repository.get_movie_by_id(movie_id)
