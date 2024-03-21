@@ -1,25 +1,18 @@
-from app import app, get_single_movie
+from flask.testing import FlaskClient
+import pytest
 from src.models.movie import Movie
 from src.repositories.movie_repository import get_movie_repository
 
 
+def test_get_single_movie_valid_id(test_app:FlaskClient):
+    repo = get_movie_repository()
+    repo.create_movie(title="The Godfather", director="Francis Ford Coppola", rating=2)
 
-test_movie = Movie(movie_id=1, title='Test Movie', director='Test Director', rating=1)
-
-
-
-movie_repo = get_movie_repository()
-
-
-
-movie_repo._db[1] = test_movie       # add test movie to db
-
-
-def test_get_single_movie_valid_id():
-    with app.test_client() as client:
-        response = client.get('/movies/1')
-        assert response.status_code == 200
-        assert b'Test Movie' in response.data
+    movie = repo.get_movie_by_title("The Godfather")
+    
+    response = test_app.get(f'/movies/{movie.movie_id}')
+    assert response.status_code == 200
+    assert b'movie' in response.data
 
 
 
