@@ -1,19 +1,19 @@
 import pytest
+from src.models.movie import Movie
 from src.repositories.movie_repository import get_movie_repository
 
-@pytest.fixture
-def movie_repository():
-    movie_repo = get_movie_repository()
-    movie_repo.clear_db()
 
-    return movie_repo
-def test_delete_movie(movie_repo):
 
-    movie = movie_repo.create_movie("Bocchi the Rock: Budokan", "Keiichiro Saito", 3)
 
-    assert movie_repo.get_movie_by_id(movie.movie_id) is not None
+def test_delete_movie():
+    repo = get_movie_repository()
 
-    movie_repo.delete_movie(movie.movie_id)
+    
+    repo.create_movie(title="The Godfather", director="Francis Ford Coppola", rating=2)
+    movie = repo.get_movie_by_title("The Godfather")
+    id = movie.movie_id
 
-    deleted_movie = movie_repo.get_movie_by_id(movie.movie_id)
-    assert deleted_movie is None
+
+    repo.delete_movie(id)
+
+    assert repo.get_movie_by_title("The Godfather") is None
