@@ -1,5 +1,8 @@
 from flask.testing import FlaskClient
+<<<<<<< HEAD
 import pytest
+=======
+>>>>>>> origin/main
 
 def test_movies_page(test_app):
     response = test_app.get('/movies')
@@ -12,4 +15,8 @@ def test_movies_page(test_app):
     assert '<th>ID</th>' in response_data, "Table should have an 'ID' column"
     assert '<th>Title</th>' in response_data, "Table should have a 'Title' column"
     assert '<th>Director</th>' in response_data, "Table should have a 'Director' column"
+<<<<<<< HEAD
     assert '<th>Rating</th>' in response_data, "Table should have a 'Rating' column"
+=======
+    assert '<th>Rating</th>' in response_data, "Table should have a 'Rating' column"
+>>>>>>> origin/main
